@@ -70,4 +70,32 @@ describe("devid parsing", () => {
       devid(id.join(""));
     }).toThrow(DevIDError);
   });
+
+  it("should correctly identify a prefix", () => {
+    const prefix = "p";
+    const id = devid(prefix);
+    const isSame = id.hasPrefix(prefix);
+    expect(isSame).toBeTruthy();
+  });
+
+  it("should correctly reject an invalid prefix", () => {
+    const prefix = "p";
+    const id = devid("g");
+    const isSame = id.hasPrefix(prefix);
+    expect(isSame).toBeFalsy();
+  });
+
+  it("should correctly reject a missing prefix", () => {
+    const prefix = "p";
+    const id = devid();
+    const isSame = id.hasPrefix(prefix);
+    expect(isSame).toBeFalsy();
+  });
+
+  it("should stringify correctly", () => {
+    const prefix = "p";
+    const id = devid(prefix);
+    const jsonId = id.toJSON();
+    expect(jsonId).toEqual(id.toString());
+  });
 });

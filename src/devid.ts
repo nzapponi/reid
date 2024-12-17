@@ -106,6 +106,10 @@ export class DevID {
   toJSON() {
     return this.toString();
   }
+
+  hasPrefix(prefix: string) {
+    return this.prefix === prefix;
+  }
 }
 
 export function devid(devidOrPrefix?: string) {
